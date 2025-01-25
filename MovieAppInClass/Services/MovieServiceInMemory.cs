@@ -15,6 +15,12 @@ namespace MovieAppInClass.Services
                 _starting = false;
             }
         }
+
+        public void AddMovie(Movie movieToAdd)
+        {
+            _movies.Add(movieToAdd);
+        }
+
         public List<Movie> GetMovies()
         {
             return _movies;

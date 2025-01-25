@@ -1,0 +1,12 @@
+﻿@model Movie
+<h1>Create a new Movie</h1>
+<form asp-action="Add" method="post">
+	<label asp-for="Title">Title</label>
+	<input type="text" asp-for="Title" /><br />
+	<label asp-for="Year">Year</label>
+	<input type="number" asp-for="Year" /><br />
+	<label asp-for="Ratting">Ratting</label>
+	<input type="number" asp-for="Ratting" /><br />
+	<input type="submit" />
+	<a asp-action="List">Cancel</a>
+</form>

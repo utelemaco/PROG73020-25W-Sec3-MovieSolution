@@ -12,5 +12,25 @@ namespace MovieAppInClass.Controllers
         {
             return View(movieService.GetMovies());
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View(new Movie());
+        }
+
+        [HttpPost]
+        public IActionResult Add(Movie movieToAdd)
+        {
+            //Add Movie into the catalogue
+            movieService.AddMovie(movieToAdd);
+            
+            //If request OK
+            return RedirectToAction("List");
+        }
+
+
     }
+
+
 }

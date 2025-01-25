@@ -1,0 +1,24 @@
+﻿@model List<Movie>
+
+<h1>Movies in my catalogue</h1>
+
+<table class="table table-hover table-sm">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Title</th>
+			<th>Year</th>
+			<th>Ratting</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var movie in Model) {
+			<tr>
+				<td>@movie.Id</td>
+				<td>@movie.Title</td>
+				<td>@movie.Year</td>
+				<td>@movie.Ratting</td>
+			</tr>
+		}
+	</tbody>
+</table>

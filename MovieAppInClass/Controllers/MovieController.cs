@@ -30,6 +30,25 @@ namespace MovieAppInClass.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(movieService.GetMovieById(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Movie movieToEdit)
+        {
+            //Add Movie into the catalogue
+            movieService.UpdateMovie(id, movieToEdit);
+
+            //If request OK
+            return RedirectToAction("List");
+        }
+
+
+
+
     }
 
 

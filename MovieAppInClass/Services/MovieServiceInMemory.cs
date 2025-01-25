@@ -21,9 +21,27 @@ namespace MovieAppInClass.Services
             _movies.Add(movieToAdd);
         }
 
+        public Movie GetMovieById(int movieId)
+        {
+            Movie? m = _movies.Find(m => m.Id == movieId);
+            if (m == null)
+            {
+                return new Movie();
+            }
+            return m;
+        }
+
         public List<Movie> GetMovies()
         {
             return _movies;
+        }
+
+        public void UpdateMovie(int movieId, Movie movieToEdit)
+        {
+            Movie movieInMemory = GetMovieById(movieId);
+            movieInMemory.Title = movieToEdit.Title;
+            movieInMemory.Year = movieToEdit.Year;
+            movieInMemory.Ratting = movieToEdit.Ratting;
         }
     }
 }

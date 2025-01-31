@@ -8,9 +8,19 @@ namespace MovieAppInClass.Controllers
     {
         IMovieService movieService = new MovieServiceInMemory();
 
+        private readonly MovieDbContext movieDbContext;
+
+        public MovieController(MovieDbContext movieDbContext)
+        {
+            this.movieDbContext = movieDbContext;
+        }
+
         public IActionResult List()
         {
-            return View(movieService.GetMovies());
+            var movies = movieDbContext.Movie
+                .OrderBy (m => m.Title)
+                .ToList();
+            return View(movies);
         }
 
         [HttpGet]
@@ -23,7 +33,9 @@ namespace MovieAppInClass.Controllers
         public IActionResult Add(Movie movieToAdd)
         {
             //Add Movie into the catalogue
-            movieService.AddMovie(movieToAdd);
+            //movieService.AddMovie(movieToAdd);
+            movieDbContext.Movie.Add(movieToAdd);
+            movieDbContext.SaveChanges();
             
             //If request OK
             return RedirectToAction("List");
@@ -33,14 +45,17 @@ namespace MovieAppInClass.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(movieService.GetMovieById(id));
+            var movieToEdit = movieDbContext.Movie.Find(id);
+            return View(movieToEdit);
         }
 
         [HttpPost]
         public IActionResult Edit(int id, Movie movieToEdit)
         {
             //Add Movie into the catalogue
-            movieService.UpdateMovie(id, movieToEdit);
+            //movieService.UpdateMovie(id, movieToEdit);
+            movieDbContext.Movie.Update(movieToEdit);
+            movieDbContext.SaveChanges();
 
             //If request OK
             return RedirectToAction("List");
@@ -49,13 +64,16 @@ namespace MovieAppInClass.Controllers
         [HttpGet]
         public IActionResult PrepareDelete(int id)
         {
-            return View("Delete", movieService.GetMovieById(id));
+            var movieToDelete = movieDbContext.Movie.Find(id);
+            return View("Delete", movieToDelete);
         }
 
         [HttpGet]
         public IActionResult ConfirmDelete(int id)
         {
-            movieService.RemoveMove(id);
+            var movieToDelete = movieDbContext.Movie.Find(id);
+            movieDbContext.Movie.Remove(movieToDelete);
+            movieDbContext.SaveChanges();
             return RedirectToAction("List");
         }
 

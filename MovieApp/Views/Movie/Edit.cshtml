@@ -8,6 +8,12 @@
 	<input asp-for="Year" type="number" /><br />
 	<label asp-for="Ratting">Year</label>
 	<input asp-for="Ratting" type="number" /><br />
+	<select asp-for="GenreId">
+		@foreach (var g in ViewBag.Genres)
+		{
+			<option value="@g.Id">@g.Name</option>
+		}
+	</select><br />
 	<input type="submit" value="Save" />
 </form>
 

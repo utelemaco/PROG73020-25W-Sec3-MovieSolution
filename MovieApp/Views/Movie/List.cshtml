@@ -4,14 +4,19 @@
 	ViewData["Title"] = "Movies";
 }
 <h1>Movies</h1>
-<a asp-asp-controller="Movie" asp-action="Add">Add a Movie</a>
+<a asp-controller="Movie" asp-action="Add">Add a Movie</a>
+<form asp-controller="Movie" asp-action="Search" method="get">
+	<input type="text" name="Title" value="@ViewBag.SearchTitle" />
+	<input type="submit" value="Search"/>
+</form>
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
 			<th>Id</th>
 			<th>Title</th>
+			<th>Genre</th>
 			<th>Year</th>
-			<th>Ratting</th>
+			<th>Rating</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -20,6 +25,7 @@
 		<tr>
 			<td>@movie.Id</td>
 			<td>@movie.Title</td>
+			<td>@movie.Genre?.Name</td>
 			<td>@movie.Year</td>
 			<td>@movie.Ratting</td>
 			<td>

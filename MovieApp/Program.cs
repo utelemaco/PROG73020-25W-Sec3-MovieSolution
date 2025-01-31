@@ -1,9 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+
+using MovieApp.Models;
 using MovieApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// first let's get db conn string from app settings:
+string ? dbConn = builder.Configuration.GetConnectionString("MovieContext");
+
+// let's register our db context and config it as a sql svr connect:
+builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(dbConn));
+
 
 var app = builder.Build();
 

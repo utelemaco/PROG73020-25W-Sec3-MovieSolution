@@ -46,6 +46,19 @@ namespace MovieAppInClass.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpGet]
+        public IActionResult PrepareDelete(int id)
+        {
+            return View("Delete", movieService.GetMovieById(id));
+        }
+
+        [HttpGet]
+        public IActionResult ConfirmDelete(int id)
+        {
+            movieService.RemoveMove(id);
+            return RedirectToAction("List");
+        }
+
 
 
 

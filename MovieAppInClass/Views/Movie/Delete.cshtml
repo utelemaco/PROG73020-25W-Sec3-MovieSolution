@@ -1,0 +1,13 @@
+﻿@model Movie
+
+<h1>Delete a Movie</h1>
+
+<label asp-for="Title">Title</label>
+<span>@Model.Title</span><br />
+<label asp-for="Year">Year</label>
+<span>@Model.Year</span><br />
+<label asp-for="Ratting">Rating</label>
+<span>@Model.Ratting</span><br />
+<a asp-action="ConfirmDelete" asp-route-id="@Model.Id">Confirm</a>
+<a asp-action="List">Cancel</a>
+

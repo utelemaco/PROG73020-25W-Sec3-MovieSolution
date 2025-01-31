@@ -36,6 +36,11 @@ namespace MovieAppInClass.Services
             return _movies;
         }
 
+        public void RemoveMove(int movieId)
+        {
+            _movies.Remove(GetMovieById(movieId));
+        }
+
         public void UpdateMovie(int movieId, Movie movieToEdit)
         {
             Movie movieInMemory = GetMovieById(movieId);

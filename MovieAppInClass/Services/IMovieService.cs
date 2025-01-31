@@ -8,5 +8,7 @@ namespace MovieAppInClass.Services
         Movie GetMovieById(int movieId);
         List<Movie> GetMovies();
         void UpdateMovie(int movieId, Movie movieToEdit);
+
+        void RemoveMove(int movieId);
     }
 }

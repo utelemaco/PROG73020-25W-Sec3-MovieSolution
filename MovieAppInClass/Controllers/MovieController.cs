@@ -37,13 +37,23 @@ namespace MovieAppInClass.Controllers
         [HttpPost]
         public IActionResult Add(Movie movieToAdd)
         {
+            if (!ModelState.IsValid) 
+            {
+                ViewBag.Genres = movieDbContext.Genre
+                    .OrderBy(g => g.Name)
+                    .ToList();
+                return View(movieToAdd);
+            }
+
+            //Everything is OKay... move on
             //Add Movie into the catalogue
             //movieService.AddMovie(movieToAdd);
             movieDbContext.Movie.Add(movieToAdd);
             movieDbContext.SaveChanges();
-            
+
             //If request OK
             return RedirectToAction("List");
+
         }
 
 
@@ -60,6 +70,13 @@ namespace MovieAppInClass.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Movie movieToEdit)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Genres = movieDbContext.Genre
+                    .OrderBy(g => g.Name)
+                    .ToList();
+                return View(movieToEdit);
+            }
             //Add Movie into the catalogue
             //movieService.UpdateMovie(id, movieToEdit);
             movieDbContext.Movie.Update(movieToEdit);

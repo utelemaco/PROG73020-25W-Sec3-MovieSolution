@@ -11,6 +11,7 @@
 			<th>Title</th>
 			<th>Year</th>
 			<th>Ratting</th>
+			<th>Genre</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -21,6 +22,7 @@
 				<td>@movie.Title</td>
 				<td>@movie.Year</td>
 				<td>@movie.Ratting</td>
+				<td>@movie.Genre.Name</td>
 				<td>
 					<a class="btn btn-primary btn-sm" asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a>
 					<a class="btn btn-danger btn-sm" asp-controller="Movie" asp-action="PrepareDelete" asp-route-id="@movie.Id">Delete</a>

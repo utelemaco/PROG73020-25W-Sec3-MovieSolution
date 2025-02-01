@@ -8,6 +8,14 @@
 	<input type="number" asp-for="Year" /><br />
 	<label asp-for="Ratting">Ratting</label>
 	<input type="number" asp-for="Ratting" /><br />
+	<label asp-for="GenreId">Genre</label>
+	<select asp-for="GenreId">
+		<option value="0">Choose a genre</option>
+		@foreach (var g in ViewBag.Genres)
+		{
+				<option value="@g.Id">@g.Name</option>
+		}
+	</select><br />
 	<input type="submit" />
 	<a asp-action="List">Cancel</a>
 </form>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MovieAppInClass.Models;
 using MovieAppInClass.Services;
 
@@ -18,6 +19,7 @@ namespace MovieAppInClass.Controllers
         public IActionResult List()
         {
             var movies = movieDbContext.Movie
+                .Include("Genre")
                 .OrderBy (m => m.Title)
                 .ToList();
             return View(movies);
@@ -26,6 +28,9 @@ namespace MovieAppInClass.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.Genres = movieDbContext.Genre
+                .OrderBy(g => g.Name)
+                .ToList();
             return View(new Movie());
         }
 
@@ -45,6 +50,9 @@ namespace MovieAppInClass.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            ViewBag.Genres = movieDbContext.Genre
+                .OrderBy(g => g.Name)
+                .ToList();
             var movieToEdit = movieDbContext.Movie.Find(id);
             return View(movieToEdit);
         }

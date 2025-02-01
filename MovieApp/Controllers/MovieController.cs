@@ -8,12 +8,13 @@ namespace MovieApp.Controllers
     
     public class MovieController : Controller
     {
-        private readonly IMovieService movieService = new MovieServiceInMemory();
+        private readonly IMovieService movieService;
         private readonly MovieContext _movieContext;
 
-        public MovieController(MovieContext movieContext)
+        public MovieController(MovieContext movieContext, IMovieService movieService)
         {
             _movieContext = movieContext;
+            this.movieService = movieService;
         }
 
         public IActionResult Index()

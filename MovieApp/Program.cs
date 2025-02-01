@@ -14,6 +14,8 @@ string ? dbConn = builder.Configuration.GetConnectionString("MovieContext");
 // let's register our db context and config it as a sql svr connect:
 builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(dbConn));
 
+builder.Services.AddScoped<IMovieService, MovieServiceInMemory>();
+
 
 var app = builder.Build();
 

@@ -8,13 +8,14 @@ namespace MovieAppInClass.Controllers
 {
     public class MovieController : Controller
     {
-        IMovieService movieService = new MovieServiceInMemory();
+        private readonly IMovieService movieService;
 
         private readonly MovieDbContext movieDbContext;
 
-        public MovieController(MovieDbContext movieDbContext)
+        public MovieController(MovieDbContext movieDbContext, IMovieService movieService)
         {
             this.movieDbContext = movieDbContext;
+            this.movieService = movieService;
         }
 
         public IActionResult List()
@@ -26,6 +27,7 @@ namespace MovieAppInClass.Controllers
             return View(movies);
         }
 
+        [HttpPost]
         public IActionResult Search(string? SearchTitle)
         {
             if (SearchTitle == null)
@@ -70,7 +72,7 @@ namespace MovieAppInClass.Controllers
             //movieService.AddMovie(movieToAdd);
             movieDbContext.Movie.Add(movieToAdd);
             movieDbContext.SaveChanges();
-
+            TempData["LastActionMessage"] = $"\"{movieToAdd.Title}\" added successfully";
             //If request OK
             return RedirectToAction("List");
 
@@ -99,9 +101,10 @@ namespace MovieAppInClass.Controllers
             }
             //Add Movie into the catalogue
             //movieService.UpdateMovie(id, movieToEdit);
+            
             movieDbContext.Movie.Update(movieToEdit);
             movieDbContext.SaveChanges();
-
+            TempData["LastActionMessage"] = $"\"{movieToEdit.Title}\" updated successfully";
             //If request OK
             return RedirectToAction("List");
         }
@@ -119,6 +122,7 @@ namespace MovieAppInClass.Controllers
             var movieToDelete = movieDbContext.Movie.Find(id);
             movieDbContext.Movie.Remove(movieToDelete);
             movieDbContext.SaveChanges();
+            TempData["LastActionMessage"] = $"\"{movieToDelete.Title}\" removed successfully";
             return RedirectToAction("List");
         }
 

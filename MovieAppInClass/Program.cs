@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 string? dbConn = builder.Configuration.GetConnectionString("MovieDBContext");
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(dbConn));
+builder.Services.AddSingleton<IMovieService, MovieServiceInDatabase>();
 
 var app = builder.Build();
 

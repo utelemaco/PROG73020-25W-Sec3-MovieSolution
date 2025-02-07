@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - MovieApp</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/lib/jqueryui/themes/overcast/jquery-ui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MovieApp.styles.css" asp-append-version="true" />
 </head>
@@ -36,6 +37,14 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (TempData.ContainsKey("LastActionMessage")) {
+                
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span>@TempData["LastActionMessage"]</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
             @RenderBody()
         </main>
     </div>
@@ -47,6 +56,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -46,6 +46,7 @@ namespace MovieApp.Controllers
             }
             _movieContext.Movie.Add(movieToAdd);
             _movieContext.SaveChanges();
+            TempData["LastActionMessage"] = $"{movieToAdd?.Title} added successfully";
             return RedirectToAction("List");
         }
 

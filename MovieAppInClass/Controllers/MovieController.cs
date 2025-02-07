@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieAppInClass.Models;
 using MovieAppInClass.Services;
+using System.Data;
 
 namespace MovieAppInClass.Controllers
 {
@@ -23,6 +24,25 @@ namespace MovieAppInClass.Controllers
                 .OrderBy (m => m.Title)
                 .ToList();
             return View(movies);
+        }
+
+        public IActionResult Search(string? SearchTitle)
+        {
+            if (SearchTitle == null)
+            {
+                var allmovies = movieDbContext.Movie
+                .Include("Genre")
+                .OrderBy(m => m.Title)
+                .ToList();
+                return View(allmovies);
+            }
+            ViewBag.SearchTitle = SearchTitle;
+            var movies = movieDbContext.Movie
+                .Include("Genre")
+                .Where(m => m.Title.StartsWith(SearchTitle))
+                .OrderBy(m => m.Title)
+                .ToList();
+            return View("List", movies);
         }
 
         [HttpGet]

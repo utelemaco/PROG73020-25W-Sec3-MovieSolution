@@ -2,6 +2,14 @@
 
 <h1>Movies in my catalogue</h1>
 
+<div class="pb-3">
+	<form asp-controller="Movie" asp-action="Search" method="get">
+		<input type="text" name="SearchTitle" value="@ViewBag.SearchTitle" />
+		<input type="submit" value="Search" />
+	</form>
+</div>
+
+
 <a class="btn btn-success btn-sm" asp-controller="Movie" asp-action="Add">Add a movie</a>
 
 <table class="table table-hover table-sm">

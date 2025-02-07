@@ -16,6 +16,7 @@
 			<th>Title</th>
 			<th>Genre</th>
 			<th>Year</th>
+			<th>Release Date</th>
 			<th>Rating</th>
 			<th></th>
 		</tr>
@@ -27,6 +28,7 @@
 			<td>@movie.Title</td>
 			<td>@movie.Genre?.Name</td>
 			<td>@movie.Year</td>
+			<td>@movie.ReleaseDate?.ToString("d")</td>
 			<td>@movie.Ratting</td>
 			<td>
 				<a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a>

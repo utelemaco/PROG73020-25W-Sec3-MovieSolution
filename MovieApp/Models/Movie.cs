@@ -13,6 +13,8 @@ namespace MovieApp.Models
         public int? Ratting { get; set; }
         public int? Year { get; set; }
 
+        public DateTime? ReleaseDate { get; set; }
+
         [Required(ErrorMessage = "Please choose a Genre to the movie")]
         [Range(1, int.MaxValue, ErrorMessage = "Please choose a Genre to the movie")]
         public int GenreId { get; set; }
